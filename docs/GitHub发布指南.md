@@ -240,7 +240,7 @@ https://github.com/你的用户名/BambuMultiLauncher/releases/latest
 然后确认这几个文件在首页能点到：
 
 - `README.md` 第一屏要有：一句话说明 + 截图 + 下载链接 + 三步上手（现在已经是这样）
-- `LICENSE` 能被识别成 MIT（首页右侧会显示 "MIT license"）
+- `LICENSE` 能被识别成 GPL-3.0（首页右侧会显示 "GPL-3.0 license"）
 - `CHANGELOG.md` 从 v1.0.5 往下排
 
 可选：**Settings → Social preview** 上传一张 1280×640 的封面（用 `docs\img\main.png` 裁一张就行），分享链接时更好看。

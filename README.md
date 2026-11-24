@@ -125,7 +125,7 @@ dist\拓竹多账号启动器.exe --render build\render
 ```
 BambuMultiLauncher/
 ├─ README.md               本文件
-├─ LICENSE                 MIT 许可证
+├─ LICENSE                 GPL-3.0 许可证
 ├─ CHANGELOG.md            版本变更记录
 ├─ NOTICE                  第三方名称与免责声明（与拓竹科技无关）
 ├─ build.bat               一键编译
@@ -170,4 +170,4 @@ BambuMultiLauncher/
 
 ## 许可
 
-[MIT](LICENSE)。名称与免责声明见 [NOTICE](NOTICE)——本工具与拓竹科技（Bambu Lab）无关，是非官方社区作品；许可只授予著作权层面的权利，不授予任何商标使用权。
+[GPL-3.0](LICENSE)：可以自由使用、修改、分发，包括商用；但**分发修改版时必须同样以 GPL-3.0 公开源码**，且不附带任何担保。名称与免责声明见 [NOTICE](NOTICE)——本工具与拓竹科技（Bambu Lab）无关，是非官方社区作品；许可只授予著作权层面的权利，不授予任何商标使用权。
