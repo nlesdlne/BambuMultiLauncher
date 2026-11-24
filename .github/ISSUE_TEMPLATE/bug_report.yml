@@ -1,0 +1,53 @@
+name: 问题反馈
+description: 报告一个 bug 或使用问题
+title: "[问题] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈。请尽量把下面的信息填全，尤其是**环境报告**，能省很多来回。
+
+        环境报告怎么拿：打开程序 → 右下角「高级设置」→「环境报告」→ 「复制全文」。
+  - type: textarea
+    id: what
+    attributes:
+      label: 发生了什么
+      description: 你期望是什么，实际是什么。
+      placeholder: 双击「家里打印机」之后，窗口没打开，状态栏提示……
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      placeholder: |
+        1. 打开程序
+        2. 双击「家里打印机」
+        3. ……
+    validations:
+      required: true
+  - type: textarea
+    id: report
+    attributes:
+      label: 环境报告
+      description: 「高级设置」→「环境报告」→「复制全文」，粘贴到这里。
+      render: text
+    validations:
+      required: true
+  - type: input
+    id: appver
+    attributes:
+      label: 启动器版本
+      placeholder: 1.0.0（主界面右上角）
+  - type: input
+    id: studiover
+    attributes:
+      label: Bambu Studio 版本
+      placeholder: 02.08.02.60（主界面左下角）
+  - type: textarea
+    id: logs
+    attributes:
+      label: 日志（可选）
+      description: 「高级设置」→「日志目录」，把当天的 app-*.log 里相关的一段贴过来。
+      render: text

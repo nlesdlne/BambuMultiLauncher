@@ -1,0 +1,11 @@
+# 第三方名称与免责声明
+
+本软件（拓竹多账号启动器 / Bambu Multi-Account Launcher）是社区第三方工具，
+与拓竹科技（Bambu Lab）没有隶属、赞助或背书关系。
+
+- “Bambu Studio”“Bambu Lab”“拓竹”等名称与标识归其各自权利人所有。
+- 本项目不包含 Bambu Studio 的任何代码、图标或资源文件；它只是在用户本机上，
+  用 Bambu Studio 自带的 --datadir 参数启动用户自己安装的 Bambu Studio。
+- 本项目不代表拓竹科技发言，也不对 Bambu Studio 的行为作任何担保。
+
+许可证（见 LICENSE）只授予著作权层面的权利，不授予任何商标使用权。

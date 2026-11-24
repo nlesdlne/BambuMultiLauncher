@@ -1,0 +1,23 @@
+# 构建产物
+dist/
+tests/*.exe
+build/
+*.pdb
+*.obj
+
+# 编辑器
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+
+# 系统
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# 临时
+*.log
+*.tmp
+_render/

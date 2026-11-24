@@ -1,0 +1,42 @@
+name: build
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 编译（.NET Framework csc，无需 VS）
+        shell: cmd
+        run: build.bat < nul
+
+      - name: 编译自检桩（tools\sleeper.cs → tests\bambu-sleeper.exe）
+        shell: cmd
+        run: tools\make-sleeper.bat
+
+      - name: 自检
+        shell: pwsh
+        run: |
+          $exe = Get-ChildItem dist -Filter *.exe | Select-Object -First 1
+          if (-not $exe) { throw "dist 下没有 exe，编译没产物" }
+          Write-Host "产物：$($exe.FullName)（$($exe.Length) 字节）"
+          $out = Join-Path $PWD 'build\selftest'
+          New-Item -ItemType Directory -Force -Path $out | Out-Null
+          Copy-Item tests\bambu-sleeper.exe $out -Force
+          $p = Start-Process -FilePath $exe.FullName -ArgumentList @('--selftest', $out) -Wait -PassThru
+          Write-Host "退出码：$($p.ExitCode)"
+          Get-Content (Join-Path $out 'selftest.log')
+          if ($p.ExitCode -ne 0) { throw "自检失败（$($p.ExitCode) 项）" }
+
+      - name: 上传产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: BambuMultiLauncher
+          path: dist/*.exe
+          if-no-files-found: error
