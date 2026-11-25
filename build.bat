@@ -7,6 +7,7 @@ rem  拓竹多账号启动器 - 一键编译
 rem  只用 .NET Framework 自带的 csc.exe，不需要 Visual Studio
 rem  用法：双击，或在命令行执行  build.bat
 rem        build.bat /icon   顺带用 Python + Pillow 重新生成图标后再编译
+rem        build.bat /stub   强制重编自检桩 tests\bambu-sleeper.exe
 rem ============================================================
 
 cd /d "%~dp0"
@@ -82,13 +83,25 @@ echo [成功] 生成：%OUT%
 for %%F in ("%OUT%") do echo        大小：%%~zF 字节
 
 rem ---- 可选：编译自检用的假 Bambu Studio ----
+rem 默认只在缺失时才编。每次重编都会换 hash，Windows 会把它当成陌生程序，
+rem 弹"打开文件 - 安全警告"，让 --selftest 卡住（见 01-项目历程\踩坑与约定.md）。
+rem 需要新桩时加 /stub。
+set "MAKESTUB="
+if /i "%~1"=="/stub" set "MAKESTUB=1"
+if /i "%~2"=="/stub" set "MAKESTUB=1"
+if not exist "tests\bambu-sleeper.exe" set "MAKESTUB=1"
+
 if exist "tools\sleeper.cs" (
-    if not exist "%OUTDIR%\..\tests" mkdir "%OUTDIR%\..\tests"
-    "%CSC%" /nologo /target:exe /codepage:65001 /out:tests\bambu-sleeper.exe tools\sleeper.cs >nul
-    if errorlevel 1 (
-        echo [提示] 自检桩编译失败（不影响主程序）。
+    if defined MAKESTUB (
+        if not exist "tests" mkdir "tests"
+        "%CSC%" /nologo /target:exe /codepage:65001 /out:tests\bambu-sleeper.exe tools\sleeper.cs >nul
+        if errorlevel 1 (
+            echo [提示] 自检桩编译失败（不影响主程序）。
+        ) else (
+            echo [成功] 自检桩：tests\bambu-sleeper.exe
+        )
     ) else (
-        echo [成功] 自检桩：tests\bambu-sleeper.exe
+        echo [跳过] 自检桩已存在：tests\bambu-sleeper.exe（要重编加 /stub）
     )
 )
 
